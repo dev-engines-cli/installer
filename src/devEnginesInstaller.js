@@ -2,7 +2,6 @@
  * @file The entry point to the devEngines CLI installer.
  */
 
-import console from 'node:console';
 import { chdir } from 'node:process';
 
 import { handleExistingInstall } from './existingInstall.js';
@@ -10,7 +9,16 @@ import { logger } from './logger.js';
 import { logo } from './logo.js';
 import { initializeState } from './state.js';
 
-const run = async function () {
+/**
+ * Runs the installer to check for existing installs,
+ * download/install Node.js, clone down devEngines CLI,
+ * and add specific folders to the PATH. Or delete the
+ * devEngines CLI and remove folders from PATH to
+ * uninstall.
+ *
+ * @return {undefined} Does not return data.
+ */
+export const run = async function () {
   console.log(logo);
 
   const state = initializeState();
@@ -41,5 +49,3 @@ const run = async function () {
   DONE! It is now safe to exit and delete this installer.
   */
 };
-
-run();

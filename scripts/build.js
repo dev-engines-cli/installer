@@ -6,7 +6,7 @@ import process from 'node:process';
 
 await Bun.build({
   compile: process.argv[2] ?? true,
-  entrypoints: ['src/devEnginesInstaller.js'],
+  entrypoints: ['src/index.js'],
   outdir: 'dist/',
   minify: true
 });

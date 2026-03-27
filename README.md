@@ -28,7 +28,7 @@ Tracking the project's progress.
   * [x] ~Batch/SH~
   * [x] ~NW.js~
 * [x] Automated GHA builds for all platforms
-* [ ] 100% test coverage
+* [x] 100% test coverage
 * [ ] Handle existing installs of devEngines CLI
   * [x] keep
   * [x] upgrade

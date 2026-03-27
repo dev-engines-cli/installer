@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "node src/devEnginesInstaller.js",
+    "start": "node src/index.js",
     "build": "bun run scripts/build.js",
     "test": "vitest run --coverage",
     "unit": "vitest --coverage",
