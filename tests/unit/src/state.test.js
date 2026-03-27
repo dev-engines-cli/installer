@@ -1,8 +1,9 @@
 import { homedir } from 'node:os';
 import { dirname, join } from 'node:path';
 
-import { initializeState } from '@/state.js';
 import { fs, vol } from 'memfs';
+
+import { initializeState } from '@/state.js';
 
 vi.mock('node:fs', () => {
   return fs;

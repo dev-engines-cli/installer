@@ -1,8 +1,8 @@
 import { chdir } from 'node:process';
 
-import { handleExistingInstall } from '@/existingInstall.js';
-
 import { select } from '@clack/prompts';
+
+import { handleExistingInstall } from '@/existingInstall.js';
 
 /*
 vi.mock('node:child_process', () => {
