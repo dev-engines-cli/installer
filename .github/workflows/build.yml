@@ -7,11 +7,13 @@ env:
 
 on:
   push:
+    branches: [ "main" ]
   pull_request:
-  workflow_dispatch:
+    branches: [ "main" ]
 
 jobs:
   build-installer:
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
@@ -24,11 +26,6 @@ jobs:
           - bun-linux-x64-musl
           - bun-windows-arm64
           - bun-windows-x64
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: /
-
     steps:
       - uses: actions/checkout@v6
       - uses: moonrepo/setup-toolchain@v0
