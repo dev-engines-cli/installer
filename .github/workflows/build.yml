@@ -1,0 +1,43 @@
+# Builds native binaries for devEngines CLI Installer
+
+name: Build artifacts
+
+env:
+  PROTO_TELEMETRY: false
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-installer:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - bun-darwin-arm64
+          - bun-darwin-x64
+          - bun-linux-arm64
+          - bun-linux-arm64-musl
+          - bun-linux-x64
+          - bun-linux-x64-musl
+          - bun-windows-arm64
+          - bun-windows-x64
+    steps:
+      - uses: actions/checkout@v6
+      - uses: moonrepo/setup-toolchain@v0
+        with:
+          auto-install: true
+      - run: proto -V
+      - run: bun -v
+      - run: bun install
+      - run: bun run build ${{ matrix.target }}
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: ${{ matrix.target }}
+          path: dist/
+          if-no-files-found: error
