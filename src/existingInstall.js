@@ -61,6 +61,7 @@ const attemptUpgrade = async function (state) {
     console.log(result);
   } catch {
     logger('Issue running `git pull origin main` on .devEngines installation.');
+    return 'done';
   }
 
   logger('Update complete.');
