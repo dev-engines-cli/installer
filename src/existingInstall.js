@@ -19,25 +19,20 @@ import { logger } from './logger.js';
  * @return {string}        'done'
  */
 const attemptUpgrade = async function (state) {
-  console.info(0);
   if (!state.gitInstalled) {
-    console.info(1);
     logger('Git CLI not found, upgrade not possible. Either install git or do a fresh install.');
     return 'done';
   }
 
   try {
-    console.info(2, state.dotDevEnginesPath);
     // cd to the installation
     chdir(state.dotDevEnginesPath);
   } catch {
-    console.info(3);
     logger('Error changing directory to devEngines installation.');
     return 'done';
   }
 
   try {
-    console.info(4);
     // check `git status` to ensure `main` branch with no changes
     const status = String(execSync('git status'));
     if (!status.includes('On branch main')) {
@@ -56,22 +51,18 @@ const attemptUpgrade = async function (state) {
       return 'done';
     }
   } catch {
-    console.info(5);
     logger('Unable to check status prior to updating.');
     return 'done';
   }
 
   try {
-    console.info(6);
     logger('Updating');
     const result = String(execSync('git pull origin main'));
     console.log(result);
   } catch {
-    console.info(7);
     logger('Issue running `git pull origin main` on .devEngines installation.');
   }
 
-  console.info(8);
   logger('Update complete.');
   return 'done';
 };

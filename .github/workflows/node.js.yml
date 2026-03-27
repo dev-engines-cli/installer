@@ -21,6 +21,7 @@ jobs:
     - uses: moonrepo/setup-toolchain@v0
       with:
         auto-install: true
+    - run: proto -v
     - run: node -v
     - run: npm -v
     - run: bun -v

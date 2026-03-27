@@ -16,13 +16,14 @@ jobs:
       fail-fast: false
       matrix:
         target:
-          - bun-linux-x64
-          - bun-linux-arm64
-          - bun-windows-x64
-          - bun-darwin-x64
           - bun-darwin-arm64
-          - bun-linux-x64-musl
+          - bun-darwin-x64
+          - bun-linux-arm64
           - bun-linux-arm64-musl
+          - bun-linux-x64
+          - bun-linux-x64-musl
+          - bun-windows-arm64
+          - bun-windows-x64
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -33,9 +34,9 @@ jobs:
       - uses: moonrepo/setup-toolchain@v0
         with:
           auto-install: true
-      - run: npm -v
+      - run: proto -v
       - run: bun -v
-      - run: npm ci
+      - run: bun install
       - run: bun run build ${{ matrix.target }}
 
       - uses: actions/upload-artifact@v6
