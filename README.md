@@ -32,7 +32,7 @@ Tracking the project's progress.
 * [ ] Handle existing installs of devEngines CLI
   * [x] keep
   * [x] upgrade
-  * [ ] delete
+  * [ ] reinstall
   * [ ] uninstall
 * [ ] Offer download Options:
   * [ ] git clone HTTPS
