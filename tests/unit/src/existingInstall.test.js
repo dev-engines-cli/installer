@@ -89,14 +89,11 @@ describe('Existing Install', () => {
       });
 
       test('Returns "done" if chdir fails', async () => {
+        mockedChdir.mockThrow();
         simulateUserSelection('upgrade');
-        mockedChdir.mockResolvedValue(() => {
-          throw 'error';
-        });
         const state = {
           existingVersion: '1.0.0',
-          gitInstalled: true,
-          dotDevEnginesPath: '/'
+          gitInstalled: true
         };
         const result = await handleExistingInstall(state);
 
