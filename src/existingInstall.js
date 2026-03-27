@@ -3,18 +3,14 @@
  */
 
 import { execSync } from 'node:child_process';
-import { rmSync } from 'node:fs';
 import { chdir } from 'node:process';
 
 import { select } from '@clack/prompts';
 
+import { deleteDevEnginesInstall } from './deleteInstall.js';
 import { logger } from './logger.js';
 
 /** @typedef {import('../types.js').STATE} STATE */
-
-const deleteDevEnginesInstall = function (state) {
-  rmSync(state.dotDevEnginesPath, { recursive: true, force: true });
-};
 
 /**
  * Attempts `git pull` on the installation to get
