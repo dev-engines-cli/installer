@@ -36,7 +36,7 @@ jobs:
       - run: bun install
       - run: bun run build ${{ matrix.target }}
 
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.target }}
           path: dist/
