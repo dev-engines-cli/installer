@@ -1,4 +1,5 @@
 import { execSync } from 'node:child_process';
+import { join } from 'node:path';
 import { chdir } from 'node:process';
 
 import { select } from '@clack/prompts';
@@ -32,7 +33,6 @@ const mockedChdir = vi.mocked(chdir);
 const mockedExecSync = vi.mocked(execSync);
 const mockedSelect = vi.mocked(select);
 const PREFIX = 'DEVENGINES CLI INSTALLER:';
-
 
 const simulateUserSelection = function (selection) {
   mockedSelect.mockResolvedValue(Promise.resolve(selection));
@@ -242,11 +242,24 @@ describe('Existing Install', () => {
       });
     });
 
-    describe('User picks "delete"', () => {
+    describe('User picks "reinstall"', () => {
       test('Hits stub', async () => {
-        simulateUserSelection('delete');
-        const state = { existingVersion: '1.0.0' };
+        simulateUserSelection('reinstall');
+        const state = {
+          existingVersion: '1.0.0',
+          dotDevEnginesPath: join('/home', 'FAKE_USER', '.devEngines')
+        };
+        vol.mkdirSync(state.dotDevEnginesPath, { recursive: true });
+        const contents = JSON.stringify({ version: '1.0.0' }, null, 2) + '\n';
+        vol.writeFileSync(join(state.dotDevEnginesPath, 'package.json'), contents);
+
+        expect(vol.existsSync(state.dotDevEnginesPath))
+          .toEqual(true);
+
         const result = await handleExistingInstall(state);
+
+        expect(vol.existsSync(state.dotDevEnginesPath))
+          .toEqual(false);
 
         expect(console.log)
           .toHaveBeenCalledWith('STUB: deleteAndReinstall');
@@ -259,8 +272,21 @@ describe('Existing Install', () => {
     describe('User picks "uninstall"', () => {
       test('Hits stub', async () => {
         simulateUserSelection('uninstall');
-        const state = { existingVersion: '1.0.0' };
+        const state = {
+          existingVersion: '1.0.0',
+          dotDevEnginesPath: join('/home', 'FAKE_USER', '.devEngines')
+        };
+        vol.mkdirSync(state.dotDevEnginesPath, { recursive: true });
+        const contents = JSON.stringify({ version: '1.0.0' }, null, 2) + '\n';
+        vol.writeFileSync(join(state.dotDevEnginesPath, 'package.json'), contents);
+
+        expect(vol.existsSync(state.dotDevEnginesPath))
+          .toEqual(true);
+
         const result = await handleExistingInstall(state);
+
+        expect(vol.existsSync(state.dotDevEnginesPath))
+          .toEqual(false);
 
         expect(console.log)
           .toHaveBeenCalledWith('STUB: uninstallDevEnginesCli');

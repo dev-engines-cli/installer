@@ -3,6 +3,7 @@
  */
 
 import { execSync } from 'node:child_process';
+import { rmSync } from 'node:fs';
 import { chdir } from 'node:process';
 
 import { select } from '@clack/prompts';
@@ -10,6 +11,10 @@ import { select } from '@clack/prompts';
 import { logger } from './logger.js';
 
 /** @typedef {import('../types.js').STATE} STATE */
+
+const deleteDevEnginesInstall = function (state) {
+  rmSync(state.dotDevEnginesPath, { recursive: true, force: true });
+};
 
 /**
  * Attempts `git pull` on the installation to get
@@ -68,12 +73,14 @@ const attemptUpgrade = async function (state) {
   return 'done';
 };
 
-const deleteAndReinstall = async function () {
+const deleteAndReinstall = async function (state) {
+  deleteDevEnginesInstall(state);
   console.log('STUB: deleteAndReinstall');
   return 'done';
 };
 
-const uninstallDevEnginesCli = async function () {
+const uninstallDevEnginesCli = async function (state) {
+  deleteDevEnginesInstall(state);
   console.log('STUB: uninstallDevEnginesCli');
   return 'done';
 };
@@ -102,7 +109,7 @@ export const handleExistingInstall = async function (state) {
         },
         {
           label: 'Fresh install',
-          value: 'delete',
+          value: 'reinstall',
           hint: 'Delete it, redownload, and reinstall'
         },
         {
@@ -117,7 +124,7 @@ export const handleExistingInstall = async function (state) {
     }
     const choiceMap = {
       upgrade: attemptUpgrade,
-      delete: deleteAndReinstall,
+      reinstall: deleteAndReinstall,
       uninstall: uninstallDevEnginesCli
     };
     const result = await choiceMap[choice](state);
