@@ -2,6 +2,7 @@ import { rmSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { deleteDevEnginesInstall } from '@/deleteInstall.js';
+import { PREFIX } from '@/logger.js';
 
 vi.mock('node:fs', () => {
   return {
@@ -10,7 +11,6 @@ vi.mock('node:fs', () => {
 });
 
 const mockedRmSync = vi.mocked(rmSync);
-const PREFIX = 'DEVENGINES CLI INSTALLER:';
 
 describe('deleteInstall', () => {
   test('Logs information on failure to delete', () => {
