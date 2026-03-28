@@ -6,6 +6,7 @@ import { select } from '@clack/prompts';
 import { fs, vol } from 'memfs';
 
 import { handleExistingInstall } from '@/existingInstall.js';
+import { PREFIX } from '@/logger.js';
 
 vi.mock('node:child_process', () => {
   return {
@@ -32,7 +33,6 @@ vi.mock('@clack/prompts', () => {
 const mockedChdir = vi.mocked(chdir);
 const mockedExecSync = vi.mocked(execSync);
 const mockedSelect = vi.mocked(select);
-const PREFIX = 'DEVENGINES CLI INSTALLER:';
 
 const simulateUserSelection = function (selection) {
   mockedSelect.mockResolvedValue(Promise.resolve(selection));
