@@ -27,7 +27,8 @@ describe('Installer state', () => {
           'existingVersion',
           'gitInstalled',
           'homeDirectory',
-          'manifestExists'
+          'manifestExists',
+          'shimsPath'
         ]);
 
       expect(state.cwd)
