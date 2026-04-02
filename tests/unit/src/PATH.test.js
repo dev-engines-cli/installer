@@ -1,10 +1,10 @@
 import { platform } from 'node:os';
 
-import { PREFIX } from '@/logger.js';
 import {
   addShimsToPath,
   removeShimsFromPath
 } from '@/PATH.js';
+import { PREFIX } from '@/logger.js';
 
 vi.mock('node:os', () => {
   return {

@@ -11,23 +11,23 @@ import { logger } from './logger.js';
 /**
  * Add the shims folder to the user's PATH.
  *
- * @param {STATE} state Installer state
+ * @param {STATE} state  Installer state
  */
 export const addShimsToPath = async function (state) {
   try {
     await addToPATH(state.shimsPath);
     logger('Added shims to PATH: ' + state.shimsPath);
   } catch (error) {
-    logger('Error adding shims to PATH (' + state.shimsPath +')', error);
+    logger('Error adding shims to PATH (' + state.shimsPath + ')', error);
   }
 };
 
 /**
  * Remove the shims folder from the user's PATH.
  *
- * @param {STATE} state Installer state
+ * @param {STATE} state  Installer state
  */
-export const removeShimsFromPath = function (state) {
+export const removeShimsFromPath = async function (state) {
   try {
     await removeFromPATH(state.shimsPath);
     logger('Removed shims from PATH: ' + state.shimsPath);
