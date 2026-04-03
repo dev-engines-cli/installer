@@ -1,4 +1,6 @@
-import { platform } from 'node:os';
+import { join } from 'node:path';
+
+import { addToPATH, removeFromPATH } from 'all-caps-path';
 
 import {
   addShimsToPath,
@@ -6,40 +8,65 @@ import {
 } from '@/PATH.js';
 import { PREFIX } from '@/logger.js';
 
-vi.mock('node:os', () => {
+vi.mock('all-caps-path', () => {
   return {
-    platform: vi.fn()
+    addToPATH: vi.fn(),
+    removeFromPATH: vi.fn()
   };
 });
 
-const mockedPlatform = vi.mocked(platform);
+const mockedAddToPATH = vi.mocked(addToPATH);
+const mockedRemoveFromPATH = vi.mocked(removeFromPATH);
+const shimsPath = join('/home', 'FAKE_USER', '.devEngines', 'shims');
+const state = { shimsPath };
+const error = 'error';
 
 describe('PATH', () => {
   describe('addShimsToPath', () => {
-    test('Windows stub', () => {
-      mockedPlatform.mockReturnValue('win32');
+    test('Successfully adds shims to PATH', async () => {
+      mockedAddToPATH.mockResolvedValue(undefined);
 
-      addShimsToPath();
+      await addShimsToPath(state);
 
       expect(console.log)
         .toHaveBeenCalledWith([
           PREFIX,
-          'STUB: Windows implementation not complete.'
+          'Added shims to PATH:',
+          shimsPath
         ].join(' '));
+    });
+
+    test('Fails to add shims to PATH', async () => {
+      mockedAddToPATH.mockRejectedValue(error);
+
+      await addShimsToPath(state);
+
+      expect(console.log)
+        .toHaveBeenCalledWith(PREFIX + ' Error adding shims to PATH (' + shimsPath + ')', error);
     });
   });
 
   describe('removeShimsFromPath', () => {
-    test('Windows stub', () => {
-      mockedPlatform.mockReturnValue('win32');
+    test('Successfully removes shims from PATH', async () => {
+      mockedRemoveFromPATH.mockResolvedValue(undefined);
 
-      removeShimsFromPath();
+      await removeShimsFromPath(state);
 
       expect(console.log)
         .toHaveBeenCalledWith([
           PREFIX,
-          'Remove the devEngines shims folder from your PATH manually.'
+          'Removed shims from PATH:',
+          shimsPath
         ].join(' '));
+    });
+
+    test('Fails to remove shims from PATH', async () => {
+      mockedRemoveFromPATH.mockRejectedValue(error);
+
+      await removeShimsFromPath(state);
+
+      expect(console.log)
+        .toHaveBeenCalledWith(PREFIX + ' Error removing shims from PATH (' + shimsPath + ')', error);
     });
   });
 });
