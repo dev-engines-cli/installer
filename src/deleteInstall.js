@@ -12,7 +12,7 @@ import { logger } from './logger.js';
 /**
  * Deletes the ~/.devEngines folder.
  *
- * @param {STATE} state Installer state
+ * @param {STATE} state  Installer state
  */
 export const deleteDevEnginesInstall = function (state) {
   try {

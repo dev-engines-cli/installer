@@ -21,6 +21,7 @@ const state = {
   homeDirectory: homedir(),
   dotDevEnginesPath: undefined,
   devEnginesCliManifestPath: undefined,
+  shimsPath: undefined,
   manifestExists: false,
   existingVersion: undefined,
   gitInstalled: false
@@ -34,6 +35,7 @@ const state = {
 export const initializeState = function () {
   state.dotDevEnginesPath = join(state.homeDirectory, '.devEngines');
   state.devEnginesCliManifestPath = join(state.dotDevEnginesPath, 'package.json');
+  state.shimsPath = join(state.dotDevEnginesPath, 'shims');
 
   try {
     state.manifestExists = existsSync(state.devEnginesCliManifestPath);
