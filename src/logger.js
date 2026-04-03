@@ -1,3 +1,5 @@
+/* eslint-disable jsdoc/reject-any-type */
+
 /**
  * @file Centralized logging function.
  */
