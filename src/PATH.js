@@ -2,7 +2,14 @@
  * @file Functions for adding/removing folders to/from the PATH.
  */
 
-import { addToPATH, removeFromPATH } from 'all-caps-path';
+import { platform } from 'node:os';
+
+import { select } from '@clack/prompts';
+import {
+  addToPATH,
+  ALLOWED_SHELLS,
+  removeFromPATH
+} from 'all-caps-path';
 
 import { logger } from './logger.js';
 
@@ -14,8 +21,21 @@ import { logger } from './logger.js';
  * @param {STATE} state  Installer state
  */
 export const addShimsToPath = async function (state) {
+  let shell;
+  if (!platform().startsWith('win')) {
+    shell = await select({
+      message: 'Where should the PATH be updated at?',
+      options: ALLOWED_SHELLS.map((shellConfig) => {
+        return {
+          label: shellConfig,
+          value: shellConfig
+        };
+      })
+    });
+  }
+
   try {
-    await addToPATH(state.shimsPath);
+    await addToPATH(state.shimsPath, logger, shell);
     logger('Added shims to PATH: ' + state.shimsPath);
   } catch (error) {
     logger('Error adding shims to PATH (' + state.shimsPath + ')', error);
