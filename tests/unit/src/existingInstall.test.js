@@ -21,7 +21,6 @@ vi.mock('node:process', () => {
     chdir: vi.fn()
   };
 });
-// Required because @clack/prompts is only installed in /installer folder
 vi.mock('@clack/prompts', () => {
   return {
     select: vi.fn(() => {
