@@ -13,5 +13,4 @@
  * @property {string}  existingVersion            The installed devEngines version number
  */
 
-/* eslint-disable-next-line import/no-unused-modules */
 export const types = {};
