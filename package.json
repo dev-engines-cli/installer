@@ -15,43 +15,37 @@
   "dependencies": {
     "@clack/prompts": "^1.8.1",
     "all-caps-path": "^0.3.1",
-    "bun": "^1.4.2"
+    "bun": "^1.4.4"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "@vitest/coverage-v8": "^5.0.3",
-    "eslint": "^10.11.0",
+    "@vitest/coverage-v8": "^5.0.5",
+    "eslint": "^10.14.0",
     "eslint-config-tjw-base": "^5.0.0",
     "eslint-config-tjw-import-x": "^1.0.1",
     "eslint-config-tjw-jest": "^4.0.0",
     "eslint-config-tjw-jsdoc": "^2.0.1",
     "eslint-import-resolver-vite": "^2.2.0",
     "eslint-plugin-import-x": "^4.17.1",
-    "eslint-plugin-jest": "^29.16.6",
-    "eslint-plugin-jsdoc": "^65.0.1",
+    "eslint-plugin-jest": "^29.17.0",
+    "eslint-plugin-jsdoc": "^65.4.2",
     "globals": "^17.13.0",
     "memfs": "^4.80.0",
-    "vitest": "^5.0.3"
+    "vitest": "^5.0.5"
   },
   "allowScripts": {
-    "bun@1.4.2": true,
+    "bun@1.4.4": true,
     "unrs-resolver@1.11.1": true
   },
   "devEngines": {
-    "runtime": [
-      {
-        "name": "node",
-        "version": "26.10.0"
-      },
-      {
-        "name": "bun",
-        "version": "1.4.2"
-      }
-    ],
+    "runtime": {
+      "name": "node",
+      "version": "26.13.0"
+    },
     "packageManager": {
       "name": "npm",
-      "version": "12.2.0"
+      "version": "12.2.1"
     }
   }
 }
