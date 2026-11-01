@@ -39,10 +39,16 @@
     "unrs-resolver@1.11.1": true
   },
   "devEngines": {
-    "runtime": {
-      "name": "node",
-      "version": "26.13.0"
-    },
+    "runtime": [
+      {
+        "name": "node",
+        "version": "26.13.0"
+      },
+      {
+        "name": "bun",
+        "version": "1.4.4"
+      }
+    ],
     "packageManager": {
       "name": "npm",
       "version": "12.2.1"
