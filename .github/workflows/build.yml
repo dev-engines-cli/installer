@@ -27,7 +27,7 @@ jobs:
           - bun-windows-arm64
           - bun-windows-x64
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: moonrepo/setup-toolchain@v0
         with:
           auto-install: true
