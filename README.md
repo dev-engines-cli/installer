@@ -5,7 +5,7 @@ This repo contains the source code for the binary that is used to install the de
 
 ## Running locally
 
-1. Install the version of Bun denoted in the `packge.json:devEngines`
+1. Use [Proto](https://github.com/TheJaredWilcurt/blog/discussions/41) to ensure you are on the correct version of Node, npm, and Bun defined in `package.json:devEngines`.
 1. Run `npm install` to get dependencies
 1. Run `npm start` to run the installer CLI source code
 
